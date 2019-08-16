@@ -2,5 +2,5 @@
 
 ```
 $ touch database/database.sqlite
-$ php artisan migrate
+$ php artisan migrate:refresh --seed
 ```
