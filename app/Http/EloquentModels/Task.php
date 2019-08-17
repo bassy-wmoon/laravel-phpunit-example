@@ -1,13 +1,13 @@
 <?php
 
-namespace App\EloquentModels;
+namespace App\Http\EloquentModels;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
 
-    public function scopeSearch($query, string $title, string $description, string $dueDate, string $status)
+    public function scopeSearch($query, ?string $title, ?string $description, ?string $dueDate, ?string $status)
     {
         return $query
             ->when($title, function ($query, $title) {
