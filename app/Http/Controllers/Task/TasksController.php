@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Task;
 
-use App\EloquentModels\Task;
+use App\Http\EloquentModels\Task;
+use App\Http\Models\Task as Model;
 use App\Http\Controllers\Controller;
+use App\Http\Response\Task as Response;
 use App\Http\Service\TaskSearchService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 class TasksController extends Controller
 {
@@ -17,7 +18,7 @@ class TasksController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        $tasks->map(function ($task){
+        $tasks = $tasks->map(function ($task){
            return [
                'title' => $task->title,
                'description' => $task->description,
@@ -32,15 +33,19 @@ class TasksController extends Controller
      * タスクを検索する
      * @param  Request  $request
      * @param  TaskSearchService  $service
+     * @return Response
      */
     public function search(Request $request, TaskSearchService $service)
     {
+        // クエリパラメータを取得してコレクションに格納する
         $params = collect();
         $params->put('title', $request->query('title'));
         $params->put('description', $request->query('description'));
         $params->put('dueDate', $request->query('dueDate'));
         $params->put('status', $request->query('status'));
 
-        $result = $service($params);
+        // タスクを検索し、レスポンスクラスに変換する
+        $results = $service($params);
+        return new Response($results);
     }
 }
