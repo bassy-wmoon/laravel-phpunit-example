@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Task;
 
-use App\Http\EloquentModels\Task;
-use App\Http\Models\Task as Model;
 use App\Http\Controllers\Controller;
+use App\Http\EloquentModels\Task;
 use App\Http\Response\Task as Response;
 use App\Http\Service\TaskSearchService;
 use Illuminate\Http\Request;
