@@ -40,7 +40,7 @@ class TasksController extends Controller
      */
     public function get(Request $request, Task $task)
     {
-        $task = $task->find($request->id);
+        $task = $task->findOrFail($request->id);
         return new TasksGet(
             new Model($task->title, $task->description, $task->due_date, $task->status)
         );

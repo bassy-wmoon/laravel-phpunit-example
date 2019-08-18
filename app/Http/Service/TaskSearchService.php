@@ -4,7 +4,7 @@
 namespace App\Http\Service;
 
 
-use App\Http\Repository\TaskRepository;
+use App\Http\Repositories\TaskRepository;
 use Illuminate\Support\Collection;
 
 class TaskSearchService
