@@ -36,7 +36,7 @@ class TasksIndex implements Responsable
                 'dueDate' => $task->getDueDate(),
                 'status' => $task->getStatus(),
             ];
-        });
+        })->toArray();
         return view('tasks.index', ['tasks' => $response]);
     }
 }
