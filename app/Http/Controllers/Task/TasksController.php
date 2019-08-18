@@ -4,37 +4,21 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\EloquentModels\Task;
-use App\Http\Response\Task as Response;
+use App\Http\Models\Task as Model;
+use App\Http\Response\TasksGet;
+use App\Http\Response\TasksIndex;
 use App\Http\Service\TaskSearchService;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
     /**
-     * タスクを一覧表示する
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
-    {
-        $tasks = Task::all();
-        $tasks = $tasks->map(function ($task){
-           return [
-               'title' => $task->title,
-               'description' => $task->description,
-               'dueDate' => $task->due_date,
-               'status' => $task->status,
-           ];
-        });
-        return view('tasks.index', ['tasks' => $tasks]);
-    }
-
-    /**
      * タスクを検索する
      * @param  Request  $request
      * @param  TaskSearchService  $service
-     * @return Response
+     * @return TasksIndex
      */
-    public function search(Request $request, TaskSearchService $service)
+    public function index(Request $request, TaskSearchService $service)
     {
         // クエリパラメータを取得してコレクションに格納する
         $params = collect();
@@ -45,6 +29,20 @@ class TasksController extends Controller
 
         // タスクを検索し、レスポンスクラスに変換する
         $results = $service($params);
-        return new Response($results);
+        return new TasksIndex($results);
+    }
+
+    /**
+     * IDに一致するタスクを取得する
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return TasksGet
+     */
+    public function get(Request $request, Task $task)
+    {
+        $task = $task->find($request->id);
+        return new TasksGet(
+            new Model($task->title, $task->description, $task->due_date, $task->status)
+        );
     }
 }

@@ -22,17 +22,33 @@ class TaskRepositoryImpl implements TaskRepository
         $this->task = $task;
     }
 
-
-    function search(?string $title, ?string $description, ?string $dueDate, ?string $status): Collection
+    /**
+     * @inheritDoc
+     */
+    public function search(?string $title, ?string $description, ?string $dueDate, ?string $status): Collection
     {
         $tasks = $this->task->search($title, $description, $dueDate, $status)->get();
+        return $this->convertToModel($tasks);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function fetchAll(): Collection
+    {
+        $tasks = $this->task->all();
+        return $this->convertToModel($tasks);
+    }
+
+    private function convertToModel($tasks)
+    {
         return $tasks->map(function ($task) {
-           return new Model(
-               $task->title,
-               $task->description,
-               $task->due_date,
-               $task->status
-           );
+            return new Model(
+                $task->title,
+                $task->description,
+                $task->due_date,
+                $task->status
+            );
         });
     }
 }
