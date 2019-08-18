@@ -7,7 +7,7 @@ use App\Http\Models\Task as Model;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Support\Collection;
 
-class Task implements Responsable
+class TasksIndex implements Responsable
 {
     /** @var Collection */
     private $tasks;
