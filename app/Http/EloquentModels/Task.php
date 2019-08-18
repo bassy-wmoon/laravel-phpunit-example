@@ -17,10 +17,10 @@ class Task extends Model
                 return $query->where('description', 'like', "%${description}%");
             })
             ->when($dueDate, function ($query, $dueDate) {
-                return $query->where('due_date', 'like', "%${dueDate}%");
+                return $query->whereDueDate($dueDate);
             })
             ->when($status, function ($query, $status) {
-                return $query->where('status', 'like', "%${status}%");
+                return $query->whereStatus($status);
             });
     }
 }
