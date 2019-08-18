@@ -15,6 +15,7 @@ class TestTasksSeeder extends Seeder
     {
         DB::table('tasks')->insert([
             [
+                'id' => 1,
                 'title' => 'テストタスク１',
                 'description' => 'テストタスク１です',
                 'due_date' => (new Carbon('2019/08/18'))->format('Y/m/d'),
@@ -23,6 +24,7 @@ class TestTasksSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
             [
+                'id' => 2,
                 'title' => 'テストタスク２',
                 'description' => 'テストタスク２です',
                 'due_date' => (new Carbon('2019/09/18'))->format('Y/m/d'),
