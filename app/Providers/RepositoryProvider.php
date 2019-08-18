@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Repository\Impl\TaskRepositoryImpl;
-use App\Http\Repository\TaskRepository;
+use App\Http\Repositories\Impl\TaskRepositoryImpl;
+use App\Http\Repositories\TaskRepository;
 use Illuminate\Support\ServiceProvider;
 
 /**

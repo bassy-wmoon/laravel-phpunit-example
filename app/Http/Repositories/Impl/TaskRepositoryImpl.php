@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Repository\Impl;
+namespace App\Http\Repositories\Impl;
 
 
 use App\Http\EloquentModels\Task;
-use App\Http\Repository\TaskRepository;
+use App\Http\Repositories\TaskRepository;
 use Illuminate\Support\Collection;
 use App\Http\Models\Task as Model;
 

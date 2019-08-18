@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Service;
 
-use App\Http\Repository\TaskRepository;
+use App\Http\Repositories\TaskRepository;
 use App\Http\Service\TaskSearchService;
 use Tests\TestCase;
 
