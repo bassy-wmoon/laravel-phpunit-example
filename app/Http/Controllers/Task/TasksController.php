@@ -74,11 +74,10 @@ class TasksController extends Controller
             ->orderBy('id')
             ->paginate(5);
 
-        // モデルをそのままレスポンスする場合
         return view('tasks.index', [
             'text' => 'hello world',
-            'tasks' => $tasks,
-            'tasks2' => $tasks2
+            'tasks' => $tasks, // Eloquentモデルのコレクション
+            'tasks2' => $tasks2 // ページネータ
         ]);
     }
 }
