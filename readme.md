@@ -22,3 +22,9 @@ $ php artisan serve
 ```
 http://localhost:8000/tasks にアクセスして下さい。  
 その他のルーティングは`php artisan route:list`をチェックして下さい。
+
+# How to run Test
+
+```
+$ vendor/bin/phpunit
+```
