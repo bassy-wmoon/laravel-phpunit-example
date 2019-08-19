@@ -15,9 +15,15 @@ class TaskSearchServiceTest extends TestCase
     {
         // リポジトリのモック作成
         $mock = \Mockery::mock(TaskRepository::class);
+
+        // searchメソッドが1回呼び出されることの検証
         $mock->shouldReceive('search')
             ->once();
+
+        // fetchAllメソッドが呼び出されないことの検証
         $mock->shouldNotReceive('fetchAll');
+
+        // モックをインスタンス化
         $this->instance(TaskRepository::class, $mock);
 
         // テストパラメータ作成
@@ -28,7 +34,7 @@ class TaskSearchServiceTest extends TestCase
         // テスト対象のインスタンス作成
         $testTarget = $this->app->make(TaskSearchService::class);
 
-        // テスト実行
+        // テスト実行&検証
         $testTarget($params);
     }
 
@@ -39,9 +45,14 @@ class TaskSearchServiceTest extends TestCase
     {
         // リポジトリのモック作成
         $mock = \Mockery::mock(TaskRepository::class);
+
+        // fetchAllメソッドが1回呼び出されることの検証
         $mock->shouldReceive('fetchAll')
             ->once();
+        // searchメソッドが呼び出されないことの検証
         $mock->shouldNotReceive('search');
+
+        // モックをインスタンス化
         $this->instance(TaskRepository::class, $mock);
 
         // テストパラメータ作成
@@ -50,7 +61,7 @@ class TaskSearchServiceTest extends TestCase
         // テスト対象のインスタンス作成
         $testTarget = $this->app->make(TaskSearchService::class);
 
-        // テスト実行
+        // テスト実行&検証
         $testTarget($params);
     }
 }

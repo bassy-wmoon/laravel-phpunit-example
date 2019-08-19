@@ -54,6 +54,7 @@ class TasksController extends Controller
      */
     public function fetch(Request $request, Task $task)
     {
+        // ページネーションなしでget
         $tasks = $task
             ->search(
                 $request->query('title'),
@@ -64,6 +65,7 @@ class TasksController extends Controller
             ->orderBy('id')
             ->get();
 
+        // ページネーションありでget
         $tasks2 = $task
             ->search(
                 $request->query('title'),
@@ -74,8 +76,9 @@ class TasksController extends Controller
             ->orderBy('id')
             ->paginate(5);
 
+        // 3タイプのレスポンスを返却
         return view('tasks.index', [
-            'text' => 'hello world',
+            'text' => 'hello world', // ただの文字列
             'tasks' => $tasks, // Eloquentモデルのコレクション
             'tasks2' => $tasks2 // ページネータ
         ]);

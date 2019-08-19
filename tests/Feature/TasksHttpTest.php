@@ -6,6 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Tests\TestCase;
 
+/**
+ * タスクのフィーチャーテスト
+ *
+ * リクエストを送信し、レスポンスの妥当性を検証する
+ * @package Tests\Feature
+ */
 class TasksHttpTest extends TestCase
 {
     use RefreshDatabase;
@@ -21,7 +27,7 @@ class TasksHttpTest extends TestCase
      */
     public function 検索条件ありの場合タスクが取得できること()
     {
-        // パラメータ
+        // リクエストパラメータ
         $title = urlencode('テスト');
 
         // 期待値
@@ -44,8 +50,13 @@ class TasksHttpTest extends TestCase
         $response = $this->get("/tasks?title=$title");
 
         // 結果検証
+        // httpステータスの検証
         $response->assertStatus(200);
+
+        // viewの検証
         $response->assertViewIs('tasks.index');
+
+        // viewにセットしたデータの検証
         $response->assertViewHas('tasks', $expected);
     }
 
@@ -70,12 +81,17 @@ class TasksHttpTest extends TestCase
             ],
         ];
 
-        // テスト実行
+        // リクエストパラメータなしでテスト実行
         $response = $this->get('/tasks');
 
         // 結果検証
+        // httpステータスの検証
         $response->assertStatus(200);
+
+        // viewの検証
         $response->assertViewIs('tasks.index');
+
+        // viewにセットしたデータの検証
         $response->assertViewHas('tasks', $expected);
     }
 
@@ -92,12 +108,17 @@ class TasksHttpTest extends TestCase
             'status' => '2',
         ];
 
-        // テスト実行
+        // パスパラメータを指定してテスト実行
         $response = $this->get('/tasks/2');
 
         // 結果検証
+        // httpステータスの検証
         $response->assertStatus(200);
+
+        // viewの検証
         $response->assertViewIs('tasks.show');
+
+        // viewにセットしたデータの検証
         $response->assertViewHas('task', $expected);
     }
 
@@ -106,28 +127,36 @@ class TasksHttpTest extends TestCase
      */
     public function IDに一致しない場合404が返却されること()
     {
-        // テスト実行
+        // パスパラメータを指定してテスト実行
         $response = $this->get('/tasks/100');
 
         // 結果検証
+        // httpステータスの検証
         $response->assertStatus(404);
     }
 
 
     /**
+     * このテストケースは検証用です。
+     *
      * @test
      */
     public function 検索条件ありの場合タスクが取得できること_ver2()
     {
-        // パラメータ
+        // リクエストパラメータ
         $title = urlencode('テスト');
 
         // テスト実行
         $response = $this->get("/task-fetch?title=$title");
 
         // 結果検証
+        // httpステータスの検証
         $response->assertStatus(200);
+
+        // viewの検証
         $response->assertViewIs('tasks.index');
+
+        // viewにセットしたデータの検証
         $response->assertViewHas('text', 'hello world');
 
         // tasksはモデルのコレクションなのでクロージャー内で検証する
