@@ -40,9 +40,47 @@ class TasksController extends Controller
      */
     public function get(Request $request, Task $task)
     {
-        $task = $task->findOrFail($request->id);
+        $task = $task->findOrFail($request->id); // 存在しなかったら404を返す
         return new TasksGet(
             new Model($task->title, $task->description, $task->due_date, $task->status)
         );
+    }
+
+    /**
+     * タスクを検索する
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return TasksIndex
+     */
+    public function fetch(Request $request, Task $task)
+    {
+        // ページネーションなしでget
+        $tasks = $task
+            ->search(
+                $request->query('title'),
+                $request->query('description'),
+                $request->query('dueDate'),
+                $request->query('status')
+            )
+            ->orderBy('id')
+            ->get();
+
+        // ページネーションありでget
+        $tasks2 = $task
+            ->search(
+                $request->query('title'),
+                $request->query('description'),
+                $request->query('dueDate'),
+                $request->query('status')
+            )
+            ->orderBy('id')
+            ->paginate(5);
+
+        // 3タイプのレスポンスを返却
+        return view('tasks.index', [
+            'text' => 'hello world', // ただの文字列
+            'tasks' => $tasks, // Eloquentモデルのコレクション
+            'tasks2' => $tasks2 // ページネータ
+        ]);
     }
 }

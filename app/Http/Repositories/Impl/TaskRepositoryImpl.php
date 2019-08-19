@@ -11,6 +11,7 @@ use App\Http\Models\Task as Model;
 
 class TaskRepositoryImpl implements TaskRepository
 {
+    /** @var Task  */
     private $task;
 
     /**
@@ -27,7 +28,10 @@ class TaskRepositoryImpl implements TaskRepository
      */
     public function search(?string $title, ?string $description, ?string $dueDate, ?string $status): Collection
     {
-        $tasks = $this->task->search($title, $description, $dueDate, $status)->orderBy('id')->get();
+        $tasks = $this->task
+            ->search($title, $description, $dueDate, $status)
+            ->orderBy('id')
+            ->get();
         return $this->convertToModel($tasks);
     }
 
@@ -40,6 +44,11 @@ class TaskRepositoryImpl implements TaskRepository
         return $this->convertToModel($tasks);
     }
 
+    /**
+     * Eloquentモデルからモデルのコレクションに変換する
+     * @param $tasks
+     * @return Collection
+     */
     private function convertToModel($tasks)
     {
         return collect(

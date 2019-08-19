@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::get('/tasks', 'Task\TasksController@index');
 Route::get('/tasks/{id}', 'Task\TasksController@get');
+Route::get('/task-fetch', 'Task\TasksController@fetch');

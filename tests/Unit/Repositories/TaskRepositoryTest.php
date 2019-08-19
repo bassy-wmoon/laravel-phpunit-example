@@ -4,9 +4,8 @@ namespace Tests\Unit;
 
 use App\Http\Models\Task;
 use App\Http\Repositories\TaskRepository;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TaskRepositoryTest extends TestCase
 {
@@ -34,7 +33,7 @@ class TaskRepositoryTest extends TestCase
      */
     public function searchで検索条件に一致するタスクが取得できること($title, $description, $dueDate, $status, $expected)
     {
-        // テスト実行
+        // リポジトリクラスをインスタンス化し、テスト実行
         $testTarget = $this->app->make(TaskRepository::class);
         $actual = $testTarget->search($title, $description, $dueDate, $status);
 
@@ -42,6 +41,10 @@ class TaskRepositoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * 検索結果ありのデータパターン
+     * @return array
+     */
     public function 検索結果ありパターン()
     {
         $expected1 = new Task(
@@ -79,7 +82,7 @@ class TaskRepositoryTest extends TestCase
      */
     public function searchで検索条件に一致しない場合0件のタスクが取得できること($title, $description, $dueDate, $status)
     {
-        // テスト実行
+        // リポジトリクラスをインスタンス化し、テスト実行
         $testTarget = $this->app->make(TaskRepository::class);
         $actual = $testTarget->search($title, $description, $dueDate, $status);
 
@@ -87,6 +90,10 @@ class TaskRepositoryTest extends TestCase
         $this->assertCount(0, $actual);
     }
 
+    /**
+     * 検索結果なしのデータパターン
+     * @return array
+     */
     public function 検索結果なしパターン()
     {
         return [
