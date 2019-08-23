@@ -19,4 +19,5 @@ Route::view('/tasks/create', 'tasks.create');
 Route::get('/tasks', 'Task\TasksController@index');
 Route::get('/tasks/{id}', 'Task\TasksController@get');
 Route::post('/tasks', 'Task\TasksController@create');
+Route::put('/tasks/{id}', 'Task\TasksController@update');
 
