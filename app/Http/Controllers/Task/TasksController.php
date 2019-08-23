@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Task;
 
 use App\Http\Controllers\Controller;
 use App\Http\EloquentModels\Task;
+use App\Http\Models\Status;
 use App\Http\Models\Task as Model;
-use App\Http\Requests\TaskRequest;
+use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Response\TasksGet;
 use App\Http\Response\TasksIndex;
 use App\Http\Service\TaskSearchService;
@@ -51,17 +53,37 @@ class TasksController extends Controller
     /**
      * タスクを新規作成する
      *
-     * @param  TaskRequest  $request
+     * @param  CreateTaskRequest  $request
      * @param  Task  $task
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function create(TaskRequest $request, Task $task)
+    public function create(CreateTaskRequest $request, Task $task)
     {
         $task->title = $request->title;
         $task->description = $request->description;
         $task->due_date = new Carbon($request->dueDate);
-        $task->status = '1';
+        $task->status = Status::TODO;
+        $task->save();
+
+        return redirect('/tasks');
+    }
+
+    /**
+     * タスクを更新する
+     *
+     * @param  UpdateTaskRequest  $request
+     * @param  Task  $task
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
+     */
+    public function update(UpdateTaskRequest $request, Task $task)
+    {
+        $task = $task->find($request->id);
+        $task->title = $request->title;
+        $task->description = $request->description;
+        $task->due_date = new Carbon($request->dueDate);
+        $task->status = $request->status;
         $task->save();
 
         return redirect('/tasks');

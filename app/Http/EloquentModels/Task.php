@@ -2,6 +2,7 @@
 
 namespace App\Http\EloquentModels;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -22,5 +23,10 @@ class Task extends Model
             ->when($status, function ($query, $status) {
                 return $query->whereStatus($status);
             });
+    }
+
+    public function getDueDateAttribute($value)
+    {
+        return (new Carbon($value))->format('Y-m-d');
     }
 }
