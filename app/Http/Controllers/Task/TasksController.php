@@ -13,6 +13,7 @@ use App\Http\Response\TasksIndex;
 use App\Http\Service\TaskSearchService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TasksController extends Controller
 {
