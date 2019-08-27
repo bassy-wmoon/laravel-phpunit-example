@@ -5,7 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TasksHttpTest extends TestCase
+/**
+ * タスク検索のフィーチャーテスト
+ * @package Tests\Feature
+ */
+class FetchTaskTest extends TestCase
 {
     use RefreshDatabase;
 
