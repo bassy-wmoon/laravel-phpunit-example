@@ -32,13 +32,13 @@ class FetchTaskTest extends TestCase
             [
                 'title' => 'テストタスク１',
                 'description' => 'テストタスク１です',
-                'dueDate' => '2019/08/18',
+                'dueDate' => '2019-08-18',
                 'status' => '1',
             ],
             [
                 'title' => 'テストタスク２',
                 'description' => 'テストタスク２です',
-                'dueDate' => '2019/09/18',
+                'dueDate' => '2019-09-18',
                 'status' => '2',
             ],
         ];
@@ -62,13 +62,13 @@ class FetchTaskTest extends TestCase
             [
                 'title' => 'テストタスク１',
                 'description' => 'テストタスク１です',
-                'dueDate' => '2019/08/18',
+                'dueDate' => '2019-08-18',
                 'status' => '1',
             ],
             [
                 'title' => 'テストタスク２',
                 'description' => 'テストタスク２です',
-                'dueDate' => '2019/09/18',
+                'dueDate' => '2019-09-18',
                 'status' => '2',
             ],
         ];
@@ -91,7 +91,7 @@ class FetchTaskTest extends TestCase
         $expected = [
             'title' => 'テストタスク２',
             'description' => 'テストタスク２です',
-            'dueDate' => '2019/09/18',
+            'dueDate' => '2019-09-18',
             'status' => '2',
         ];
 
