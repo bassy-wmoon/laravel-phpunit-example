@@ -47,13 +47,13 @@ class TaskRepositoryTest extends TestCase
         $expected1 = new Task(
             'テストタスク１',
             'テストタスク１です',
-            '2019/08/18',
+            '2019-08-18',
             '1'
         );
         $expected2 = new Task(
             'テストタスク２',
             'テストタスク２です',
-            '2019/09/18',
+            '2019-09-18',
             '2'
         );
 
@@ -61,13 +61,13 @@ class TaskRepositoryTest extends TestCase
             // title, description, dueDate, status, expected
             ['テストタスク１', null, null, null, collect([$expected1])], // title完全一致
             [null, 'テストタスク１です', null, null, collect([$expected1])], // description完全一致
-            [null, null, '2019/08/18',null, collect([$expected1])], // dueDate一致
+            [null, null, '2019-08-18',null, collect([$expected1])], // dueDate一致
             [null, null, null, '1', collect([$expected1])], // status一致
             ['タスク２', null, null, null, collect([$expected2])], // title部分一致
             [null, 'タスク２', null, null, collect([$expected2])], // description部分一致
             ['タスク', null, null, null, collect([$expected1, $expected2])], // title部分一致
             [null, 'テスト', null, null, collect([$expected1, $expected2])],// description部分一致
-            ['テスト', 'テスト', '2019/09/18', '2', collect([$expected2])], // パラメータ全部あり
+            ['テスト', 'テスト', '2019-09-18', '2', collect([$expected2])], // パラメータ全部あり
             [null, null, null, null, collect([$expected1, $expected2])], // パラメータ全部なし
         ];
     }
@@ -93,9 +93,9 @@ class TaskRepositoryTest extends TestCase
             // title, description, dueDate, status
             ['hoge', null, null, null],
             [null, 'hoge', null, null],
-            [null, null, '2019/12/31', null],
+            [null, null, '2019-12-31', null],
             [null, null, null, '9'],
-            ['hoge', 'hoge', '2019/12/31', '9'],
+            ['hoge', 'hoge', '2019-12-31', '9'],
         ];
     }
 
@@ -109,13 +109,13 @@ class TaskRepositoryTest extends TestCase
             new Task(
                 'テストタスク１',
                 'テストタスク１です',
-                '2019/08/18',
+                '2019-08-18',
                 '1'
             ),
             new Task(
                 'テストタスク２',
                 'テストタスク２です',
-                '2019/09/18',
+                '2019-09-18',
                 '2'
             )
         ]);
