@@ -18,7 +18,7 @@ class TestTasksSeeder extends Seeder
                 'id' => 1,
                 'title' => 'テストタスク１',
                 'description' => 'テストタスク１です',
-                'due_date' => (new Carbon('2019/08/18'))->format('Y/m/d'),
+                'due_date' => (new Carbon('2019/08/18'))->format('Y-m-d'),
                 'status' => '1',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -27,7 +27,7 @@ class TestTasksSeeder extends Seeder
                 'id' => 2,
                 'title' => 'テストタスク２',
                 'description' => 'テストタスク２です',
-                'due_date' => (new Carbon('2019/09/18'))->format('Y/m/d'),
+                'due_date' => (new Carbon('2019/09/18'))->format('Y-m-d'),
                 'status' => '2',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

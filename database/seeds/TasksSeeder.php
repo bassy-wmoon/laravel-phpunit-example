@@ -16,7 +16,7 @@ class TasksSeeder extends Seeder
             [
                 'title' => 'タスク1',
                 'description' => 'このタスクはサンプルです１',
-                'due_date' => Carbon::now()->format('Y/m/d'),
+                'due_date' => Carbon::now()->format('Y-m-d'),
                 'status' => '1',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -24,7 +24,7 @@ class TasksSeeder extends Seeder
             [
                 'title' => 'タスク2',
                 'description' => 'このタスクはサンプルです２',
-                'due_date' => Carbon::now()->format('Y/m/d'),
+                'due_date' => Carbon::now()->format('Y-m-d'),
                 'status' => '2',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
