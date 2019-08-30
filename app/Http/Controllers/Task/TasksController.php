@@ -63,7 +63,7 @@ class TasksController extends Controller
     {
         $task->title = $request->title;
         $task->description = $request->description;
-        $task->due_date = new Carbon($request->dueDate);
+        $task->due_date = (new Carbon($request->dueDate))->format('Y-m-d');
         $task->status = Status::TODO;
         $task->save();
 
@@ -83,7 +83,7 @@ class TasksController extends Controller
         $task = $task->find($request->id);
         $task->title = $request->title;
         $task->description = $request->description;
-        $task->due_date = new Carbon($request->dueDate);
+        $task->due_date = (new Carbon($request->dueDate))->format('Y-m-d');
         $task->status = $request->status;
         $task->save();
 
