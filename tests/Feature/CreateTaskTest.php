@@ -7,6 +7,10 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+/**
+ * タスク登録のフィーチャーテスト
+ * @package Tests\Feature
+ */
 class CreateTaskTest extends TestCase
 {
     use RefreshDatabase;
@@ -34,6 +38,12 @@ class CreateTaskTest extends TestCase
         // 検証
         $response->assertStatus(Response::HTTP_FOUND);
         $response->assertRedirect('/tasks');
+        $this->assertDatabaseHas('tasks', [
+            'title' => 'タスクタイトル',
+            'description' => 'タスクの説明',
+            'due_date' => '2019-08-01',
+            'status' => '1'
+        ]);
     }
 
     /**
@@ -53,6 +63,35 @@ class CreateTaskTest extends TestCase
 
         // 検証
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @test
+     * @dataProvider 型不正パターン
+     */
+    public function 型が不正な場合ステータス422が返却されること($arg) {
+
+        // パラメータ
+        $params = [
+            'title' => $arg,
+            'description' => $arg,
+            'dueDate' => '2019/08/01'
+        ];
+
+        // テスト実行
+        $response = $this->post('/tasks', $params);
+
+        // 検証
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    public function 型不正パターン() {
+        return [
+            '数値' => [100],
+            '真' => [true],
+            '偽' => [false],
+            '配列' => [['1', '2', '3']],
+        ];
     }
 
     /**
